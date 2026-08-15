@@ -11,7 +11,7 @@ body:
         Спасибо за использование **zapret-discord-youtube-linux**!
         Перед созданием issue, пожалуйста, выполните все шаги ниже и заполните информацию.
 
-        > ⚠️ Это адаптер, а не источник стратегий. Если у вас не работает YouTube или другой сайт — сначала проверьте [раздел "Поддержка и помощь" в README](https://github.com/Sergeydigl3/zapret-discord-youtube-linux#поддержка-и-помощь), а также [Issues](https://github.com/Flowseal/zapret-discord-youtube/issues) и [Discussions](https://github.com/Flowseal/zapret-discord-youtube/discussions) в репозитории Flowseal.
+        > ⚠️ Это адаптер, а не источник стратегий. Если у вас не работает YouTube или другой сайт — сначала проверьте [раздел "Поддержка и помощь" в README](https://github.com/kik4311/zapret-discord-youtube-linux#поддержка-и-помощь), а также [Issues](https://github.com/Flowseal/zapret-discord-youtube/issues) и [Discussions](https://github.com/Flowseal/zapret-discord-youtube/discussions) в репозитории Flowseal.
 
   - type: checkboxes
     id: checklist
@@ -20,7 +20,7 @@ body:
       options:
         - label: "Я прочитал README полностью"
         - label: "Я проверил существующие issues и discussions и не нашёл ответа"
-        - label: "Я попробовал ВСЕ другие стратегии (а не 2,3) и использовал `./auto_tune_youtube.sh` для автоподбора"
+        - label: "Я попробовал ВСЕ другие стратегии (а не 2,3) и использовал `./service.sh autocheck` для автоподбора"
         - label: "Я проверил Issues и Discussions в репозитории Flowseal/zapret-discord-youtube"
         - label: "Я полностью удалял директорию и устанавливал заново строго по инструкции"
         - label: "Я пытался решить проблему самостоятельно через Google или ChatGPT, безрезультатно"

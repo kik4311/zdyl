@@ -184,34 +184,6 @@ gamefiterudp=true
 
 ---
 
-## Автоматический подбор стратегий
-
-```bash
-./auto_tune_youtube.sh
-```
-
-Скрипт автоматически:
-1. Перебирает стратегии из `/custom-strategies` и `/zapret-latest` (начинающиеся на `general`)
-2. Тестирует доступ к YouTube
-3. Сохраняет результаты в `auto_tune_youtube_results.txt`
-4. Предлагает запустить или сохранить рабочую стратегию в `conf.env`
-
-> Функционал экспериментальный, достоверность не гарантирована
-
------
-```bash
-./auto_tune.sh
-```
-
-Скрипт для проверки любого домена:
-1. Перебирает стратегии из `/custom-strategies` и `/zapret-latest` (начинающиеся на `general`)
-2. Тестирует доступ ко всем указанным через пробел доменам
-3. Сохраняет стратегии сработавшие только на все указанные домены в auto_tune_results.sh
-
-> Функционал также экспериментальный
-
------
-
 ## Автопроверка конфигураций (Run Tests)
 
 Аналог утилиты **Run Tests** из [Flowseal/zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube).
@@ -362,7 +334,7 @@ dinitctl log zapret_discord_youtube
 **Прежде чем создавать Issue или Discussion:**
 
 1. Посмотрите [Issues в репозитории со стратегиями](https://github.com/Flowseal/zapret-discord-youtube/issues) — возможно, проблема уже обсуждается там
-2. Попробуйте другие стратегии или воспользуйтесь [автоматическим подбором](#автоматический-подбор-стратегий)
+2. Попробуйте другие стратегии или воспользуйтесь [автопроверкой конфигураций](#автопроверка-конфигураций-run-tests)
 3. Проверьте [Discussions](https://github.com/Flowseal/zapret-discord-youtube/discussions) — там обсуждают рабочие решения
 
 ### Когда создавать Issue/Discussion у меня
