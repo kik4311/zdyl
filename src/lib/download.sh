@@ -108,8 +108,12 @@ extract_nfqws_binary() {
 
     [[ -z "$bin_path" ]] && handle_error "Бинарник ${binary_name} не найден для платформы ${platform_dir}"
 
-    cp "$bin_path" "${out_dir}/${binary_name}"
-    chmod +x "${out_dir}/${binary_name}"
+    # Копируем во временный файл и заменяем атомарно через mv.
+    # Прямой cp падает с ETXTBSY ("Text file busy"), если nfqws уже запущен.
+    local tmp_bin="${out_dir}/${binary_name}.new"
+    cp "$bin_path" "$tmp_bin" || handle_error "Ошибка при сохранении бинарника ${binary_name}"
+    chmod +x "$tmp_bin" || handle_error "Ошибка при установке прав на бинарник"
+    mv -f "$tmp_bin" "${out_dir}/${binary_name}" || handle_error "Ошибка при замене бинарника ${binary_name}"
 
     log "Бинарник сохранён: ${out_dir}/${binary_name}" >&2
     rm -rf "$tmpdir" "$archive"

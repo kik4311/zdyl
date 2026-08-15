@@ -36,16 +36,17 @@ show_update_usage() {
 # Определение текущих установленных версий
 # -----------------------------------------------------------------------------
 
-# Установленная версия nfqws (из .deps-versions, затем из бинарника, затем из константы)
+# Установленная версия nfqws (из бинарника, затем из .deps-versions, затем из константы)
+# Бинарник — источник правды: .deps-versions может устареть при сбое обновления
 _installed_nfqws_version() {
     local fv bv
-    if [[ -f "$UPDATE_STATUS_FILE" ]]; then
-        fv=$(grep -m1 '^nfqws=' "$UPDATE_STATUS_FILE" | cut -d= -f2-)
-        [[ -n "$fv" ]] && { echo "$fv"; return 0; }
-    fi
     if [[ -x "$NFQWS_PATH" ]]; then
         bv=$("$NFQWS_PATH" --version 2>/dev/null | grep -oP 'v\K[0-9][0-9.]*' | head -n1)
         [[ -n "$bv" ]] && { echo "$bv"; return 0; }
+    fi
+    if [[ -f "$UPDATE_STATUS_FILE" ]]; then
+        fv=$(grep -m1 '^nfqws=' "$UPDATE_STATUS_FILE" | cut -d= -f2-)
+        [[ -n "$fv" ]] && { echo "$fv"; return 0; }
     fi
     echo "${ZAPRET_RECOMMENDED_VERSION#v}"
 }
