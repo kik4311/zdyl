@@ -9,13 +9,8 @@
 **Проверено на:**
 Ubuntu 24.04 • Debian 12 • Arch Linux • Gentoo Linux
 
-[![Telegram Channel](https://img.shields.io/badge/Telegram-Канал-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/+oOPnF-TKMAIxMjg6)
-[![Telegram Chat](https://img.shields.io/badge/Telegram-Чат-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/+mPohxYQQdZoyMjRi)
-
-[![Boosty](https://img.shields.io/badge/Boosty-Сказать_спасибо-FF6154?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDI0QzE4LjYyNzQgMjQgMjQgMTguNjI3NCAyNCAxMkMyNCA1LjM3MjU4IDE4LjYyNzQgMCAxMiAwQzUuMzcyNTggMCAwIDUuMzcyNTggMCAxMkMwIDE4LjYyNzQgNS4zNzI1OCAyNCAxMiAyNFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=&logoColor=white)](https://boosty.to/sergeydigl3/about)
-
-[![GitHub stars](https://img.shields.io/github/stars/Sergeydigl3/zapret-discord-youtube-linux?style=social)](https://github.com/Sergeydigl3/zapret-discord-youtube-linux/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Sergeydigl3/zapret-discord-youtube-linux?style=social)](https://github.com/Sergeydigl3/zapret-discord-youtube-linux/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/kik4311/zapret-discord-youtube-linux?style=social)](https://github.com/kik4311/zapret-discord-youtube-linux/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/kik4311/zapret-discord-youtube-linux?style=social)](https://github.com/kik4311/zapret-discord-youtube-linux/network/members)
 
 </div>
 
@@ -31,7 +26,7 @@ Ubuntu 24.04 • Debian 12 • Arch Linux • Gentoo Linux
 ## Быстрый старт
 
 ```bash
-git clone https://github.com/Sergeydigl3/zapret-discord-youtube-linux.git
+git clone https://github.com/kik4311/zapret-discord-youtube-linux.git
 cd zapret-discord-youtube-linux
 
 ./service.sh download-deps --default
@@ -63,7 +58,7 @@ cd zapret-discord-youtube-linux
 - Напрямую: `./service.sh download-deps -z v72.9 -s main`
 - В коде: отредактируйте константы в `src/lib/constants.sh`
 
-Если текущая версия не работает, попробуйте [стабильные релизы](https://github.com/Sergeydigl3/zapret-discord-youtube-linux/releases).
+Если текущая версия не работает, попробуйте [стабильные релизы](https://github.com/kik4311/zapret-discord-youtube-linux/releases).
 
 **Сторонние проекты:**
 - [Версия от Snowy-Fluffy](https://github.com/Snowy-Fluffy/zapret.installer)
@@ -372,12 +367,12 @@ dinitctl log zapret_discord_youtube
 
 ### Когда создавать Issue/Discussion у меня
 
-**Когда писать в [Issues](https://github.com/Sergeydigl3/zapret-discord-youtube-linux/issues):**
+**Когда писать в [Issues](https://github.com/kik4311/zapret-discord-youtube-linux/issues):**
 - Ошибки в работе **скрипта адаптера**
 - Вопросы по работе **скрипта адаптера**
 - Предложение добавить стратегию в custom-strategies
 
-**Когда писать в [Discussions](https://github.com/Sergeydigl3/zapret-discord-youtube-linux/discussions):**
+**Когда писать в [Discussions](https://github.com/kik4311/zapret-discord-youtube-linux/discussions):**
 - Не работает YouTube или другой сайт (после проверки репозитория Flowseal)
 - Поиск рабочих стратегий
 - Обмен опытом
@@ -392,11 +387,11 @@ dinitctl log zapret_discord_youtube
 
 **Спасибо всем, кто улучшает проект!** 🎉
 
-<a href="https://github.com/Sergeydigl3/zapret-discord-youtube-linux/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Sergeydigl3/zapret-discord-youtube-linux" alt="Contributors" />
+<a href="https://github.com/kik4311/zapret-discord-youtube-linux/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kik4311/zapret-discord-youtube-linux" alt="Contributors" />
 </a>
 
-Хотите видеть здесь свое имя? Сделайте [Pull Request](https://github.com/Sergeydigl3/zapret-discord-youtube-linux/pulls)!
+Хотите видеть здесь свое имя? Сделайте [Pull Request](https://github.com/kik4311/zapret-discord-youtube-linux/pulls)!
 
 </div>
 
@@ -404,6 +399,6 @@ dinitctl log zapret_discord_youtube
 
 <div align="center">
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Sergeydigl3/zapret-discord-youtube-linux&type=Date)](https://star-history.com/#Sergeydigl3/zapret-discord-youtube-linux&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=kik4311/zapret-discord-youtube-linux&type=Date)](https://star-history.com/#kik4311/zapret-discord-youtube-linux&Date)
 
 </div>
