@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎧 Zapret Discord YouTube Linux 📺
+# Zapret Discord YouTube Linux
 
 ### Plug-and-Play адаптер для обхода замедления YouTube и Discord на Linux
 
@@ -14,30 +14,30 @@
 
 ---
 
-## ✨ Возможности
+## Возможности
 
-- 🚀 **Простая установка** — одна команда скачивает nfqws и стратегии
-- 🔄 **Автопроверка конфигураций** — подбирает лучшую стратегию для ваших целей
-- 🛡 **Watchdog** — при сбоях автоматически переключает стратегию
-- 📦 **Встроенное обновление** — проверка и установка новых версий nfqws и стратегий
-- 🧩 **GameFilter** — поддержка игровых стратегий
-- 🖥 **Firewall** — nftables и iptables
-- ⚙️ **Init-системы** — systemd, OpenRC, runit, s6, dinit
-- 🪄 **Меню приложений** — запуск через ярлык в GUI
+- **Простая установка** — одна команда скачивает nfqws и стратегии
+- **Автопроверка конфигураций** — подбирает лучшую стратегию для ваших целей
+- **Watchdog** — при сбоях автоматически переключает стратегию
+- **Встроенное обновление** — проверка и установка новых версий nfqws и стратегий
+- **GameFilter** — поддержка игровых стратегий
+- **Firewall** — nftables и iptables
+- **Init-системы** — systemd, OpenRC, runit, s6, dinit
+- **Меню приложений** — запуск через ярлык в GUI
 
 ---
 
-## 📋 Требования
+## Требования
 
 - **Linux** с `nftables` или `iptables`
 - Архитектура: **x86_64, ARM, MIPS** и другие (определяется автоматически)
 - Утилиты: `git`, `curl`, `tar`, `gcc`/`cc` (для некоторых стратегий)
 
-> 💡 **Работа без пароля:** `./service.sh setup-permissions` — настроит NOPASSWD для nft/nfqws
+> **Работа без пароля:** `./service.sh setup-permissions` — настроит NOPASSWD для nft/nfqws
 
 ---
 
-## 🚀 Быстрый старт
+## Быстрый старт
 
 ```bash
 git clone https://github.com/kik4311/zapret-discord-youtube-linux.git
@@ -51,7 +51,7 @@ cd zapret-discord-youtube-linux
 
 ---
 
-## 🧠 Как это работает
+## Как это работает
 
 Адаптер загружает стратегии из [Flowseal/zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube) — готовые `.bat`-конфигурации для `nfqws` (бинарник из [zapret](https://github.com/bol-van/zapret)). Стратегии автоматически адаптируются под Linux (переименование, замена путей) и запускаются через `nfqws`.
 
@@ -63,7 +63,7 @@ cd zapret-discord-youtube-linux
 
 ---
 
-## ⚙️ Конфигурация (`conf.env`)
+## Конфигурация (`conf.env`)
 
 Файл создаётся автоматически при первом запуске или вручную:
 
@@ -87,7 +87,7 @@ firewall_backend=auto       # auto | nftables | iptables
 
 ---
 
-## 📖 Использование
+## Использование
 
 ### Интерактивное меню
 
@@ -142,7 +142,7 @@ firewall_backend=auto       # auto | nftables | iptables
 
 ---
 
-## 🧪 Автопроверка конфигураций (Run Tests)
+## Автопроверка конфигураций (Run Tests)
 
 Аналог утилиты **Run Tests** из Flowseal/zapret-discord-youtube.
 
@@ -172,7 +172,7 @@ CloudflareDNS1111 = "PING:1.1.1.1"
 
 ---
 
-## 🛡 Watchdog (автопереключение при сбое)
+## Watchdog (автопереключение при сбое)
 
 Следит за доступностью целей и автоматически меняет стратегию при сбоях.
 
@@ -190,7 +190,7 @@ CloudflareDNS1111 = "PING:1.1.1.1"
 
 ---
 
-## ⚡ Автозагрузка (системный сервис)
+## Автозагрузка (системный сервис)
 
 ```bash
 ./service.sh service install   # установить и запустить сервис
@@ -260,7 +260,7 @@ dinitctl log zapret_discord_youtube
 
 ---
 
-## 🖥 Ярлык в меню приложений
+## Ярлык в меню приложений
 
 ```bash
 ./service.sh desktop install    # создать ярлык
@@ -271,7 +271,7 @@ dinitctl log zapret_discord_youtube
 
 ---
 
-## 🔧 Прочие команды
+## Прочие команды
 
 ```bash
 ./service.sh kill              # остановить nfqws и очистить правила firewall
@@ -281,7 +281,7 @@ dinitctl log zapret_discord_youtube
 
 ---
 
-## 📦 О версиях
+## О версиях
 
 По умолчанию используются:
 - **nfqws**: v72.9 (рекомендованная, задана в `src/lib/constants.sh` как `ZAPRET_RECOMMENDED_VERSION`)
@@ -293,7 +293,7 @@ dinitctl log zapret_discord_youtube
 
 ---
 
-## 🤝 Поддержка и помощь
+## Поддержка и помощь
 
 > [!IMPORTANT]
 > Это **адаптер**! Он не гарантирует, что стратегии разблокируют всё.
@@ -314,11 +314,11 @@ dinitctl log zapret_discord_youtube
 
 ---
 
-## 👥 Контрибьюторы
+## Контрибьюторы
 
 <div align="center">
 
-**Спасибо всем, кто улучшает проект!** 🎉
+**Спасибо всем, кто улучшает проект!**
 
 <a href="https://github.com/kik4311/zapret-discord-youtube-linux/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=kik4311/zapret-discord-youtube-linux" alt="Contributors" />
