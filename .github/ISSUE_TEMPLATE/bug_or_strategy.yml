@@ -8,10 +8,10 @@ body:
   - type: markdown
     attributes:
       value: |
-        Спасибо за использование **zapret-discord-youtube-linux**!
+        Спасибо за использование **zdyl**!
         Перед созданием issue, пожалуйста, выполните все шаги ниже и заполните информацию.
 
-        > ⚠️ Это адаптер, а не источник стратегий. Если у вас не работает YouTube или другой сайт — сначала проверьте [раздел "Поддержка и помощь" в README](https://github.com/kik4311/zapret-discord-youtube-linux#поддержка-и-помощь), а также [Issues](https://github.com/Flowseal/zapret-discord-youtube/issues) и [Discussions](https://github.com/Flowseal/zapret-discord-youtube/discussions) в репозитории Flowseal.
+        > ⚠️ Это адаптер, а не источник стратегий. Если у вас не работает YouTube или другой сайт — сначала проверьте [раздел "Поддержка и помощь" в README](https://github.com/kik4311/zdyl#поддержка-и-помощь), а также [Issues](https://github.com/Flowseal/zapret-discord-youtube/issues) и [Discussions](https://github.com/Flowseal/zapret-discord-youtube/discussions) в репозитории Flowseal.
 
   - type: checkboxes
     id: checklist
@@ -93,8 +93,8 @@ body:
       label: "Шаги воспроизведения"
       description: "Вставьте подряд команды, которые выполняли, начиная с git clone"
       placeholder: |
-        git clone https://github.com/Sergeydigl3/zapret-discord-youtube-linux.git
-        cd zapret-discord-youtube-linux
+        git clone https://github.com/kik4311/zdyl.git
+        cd zdyl
         ./service.sh download-deps --default
         ./service.sh run
     validations:

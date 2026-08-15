@@ -1,14 +1,14 @@
 <div align="center">
 
-# Zapret Discord YouTube Linux
+# zdyl
 
 ### Plug-and-Play адаптер для обхода замедления YouTube и Discord на Linux
 
 Адаптер для стратегий [Flowseal/zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube) и [zapret](https://github.com/bol-van/zapret) от bol-van.
 
-[![GitHub stars](https://img.shields.io/github/stars/kik4311/zapret-discord-youtube-linux?style=social)](https://github.com/kik4311/zapret-discord-youtube-linux/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/kik4311/zapret-discord-youtube-linux?style=social)](https://github.com/kik4311/zapret-discord-youtube-linux/network/members)
-[![GitHub release](https://img.shields.io/github/v/release/kik4311/zapret-discord-youtube-linux?style=social)](https://github.com/kik4311/zapret-discord-youtube-linux/releases)
+[![GitHub stars](https://img.shields.io/github/stars/kik4311/zdyl?style=social)](https://github.com/kik4311/zdyl/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/kik4311/zdyl?style=social)](https://github.com/kik4311/zdyl/network/members)
+[![GitHub release](https://img.shields.io/github/v/release/kik4311/zdyl?style=social)](https://github.com/kik4311/zdyl/releases)
 
 </div>
 
@@ -40,8 +40,8 @@
 ## Быстрый старт
 
 ```bash
-git clone https://github.com/kik4311/zapret-discord-youtube-linux.git
-cd zapret-discord-youtube-linux
+git clone https://github.com/kik4311/zdyl.git
+cd zdyl
 
 ./service.sh download-deps --default
 ./service.sh
@@ -289,7 +289,7 @@ dinitctl log zapret_discord_youtube
 
 Сменить версии можно через `download-deps` или командой `update`.
 
-> Если текущая версия не работает — попробуйте [стабильные релизы](https://github.com/kik4311/zapret-discord-youtube-linux/releases) или другие стратегии.
+> Если текущая версия не работает — попробуйте [стабильные релизы](https://github.com/kik4311/zdyl/releases) или другие стратегии.
 
 ---
 
@@ -302,11 +302,11 @@ dinitctl log zapret_discord_youtube
 1. [Issues](https://github.com/Flowseal/zapret-discord-youtube/issues) и [Discussions](https://github.com/Flowseal/zapret-discord-youtube/discussions) репозитория стратегий — проблема может уже обсуждаться
 2. Воспользуйтесь [автопроверкой конфигураций](#автопроверка-конфигураций-run-tests) — она подберёт рабочую стратегию
 
-**В [Issues](https://github.com/kik4311/zapret-discord-youtube-linux/issues) пишите:**
+**В [Issues](https://github.com/kik4311/zdyl/issues) пишите:**
 - Ошибки в работе скрипта адаптера
 - Предложения по функциям
 
-**В [Discussions](https://github.com/kik4311/zapret-discord-youtube-linux/discussions):**
+**В [Discussions](https://github.com/kik4311/zdyl/discussions):**
 - Не работает YouTube/Discord (после проверки Flowseal)
 - Поиск рабочих стратегий, обмен опытом
 
@@ -320,8 +320,8 @@ dinitctl log zapret_discord_youtube
 
 **Спасибо всем, кто улучшает проект!**
 
-<a href="https://github.com/kik4311/zapret-discord-youtube-linux/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=kik4311/zapret-discord-youtube-linux" alt="Contributors" />
+<a href="https://github.com/kik4311/zdyl/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kik4311/zdyl" alt="Contributors" />
 </a>
 
 </div>
@@ -330,6 +330,6 @@ dinitctl log zapret_discord_youtube
 
 <div align="center">
 
-[![Star History Chart](https://api.star-history.com/svg?repos=kik4311/zapret-discord-youtube-linux&type=Date)](https://star-history.com/#kik4311/zapret-discord-youtube-linux&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=kik4311/zdyl&type=Date)](https://star-history.com/#kik4311/zdyl&Date)
 
 </div>
