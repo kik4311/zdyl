@@ -5,3 +5,5 @@ nfqws
 conf.env.backup
 targets.txt
 auto_check_results.txt
+watchdog.log
+.deps-versions

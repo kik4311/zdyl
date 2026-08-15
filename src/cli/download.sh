@@ -30,6 +30,7 @@ show_dependencies_menu() {
     echo "1. Скачать зависимости (интерактивный выбор версий)"
     echo "2. Скачать рекомендованные версии"
     echo "3. Показать список стратегий"
+    echo "4. Проверить обновления"
     echo "0. Назад"
     read -p "Выберите действие: " choice
     case $choice in
@@ -45,6 +46,10 @@ show_dependencies_menu() {
         show_strategies
         read -p "Нажмите Enter для продолжения..."
         show_dependencies_menu
+        ;;
+    4)
+        handle_update_command
+        read -p "Нажмите Enter для продолжения..."
         ;;
     0) return ;;
     *)
@@ -138,6 +143,9 @@ handle_download_deps_command() {
         echo ""
         echo "Пропуск загрузки стратегий"
     fi
+
+    # Фиксируем установленные версии для команды update
+    _persist_deps_versions "$zapret_version" "$strat_version" 2>/dev/null || true
 
     return 0
 }

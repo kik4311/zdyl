@@ -17,6 +17,8 @@ show_usage() {
     echo "    run            Run interactively (without installing service)"
     echo "    setup-permissions  Setup NOPASSWD for nft/iptables/nfqws"
     echo "    autocheck       Auto-check configurations (strategies) against targets"
+    echo "    update          Check for updates and update dependencies"
+    echo "    watchdog        Auto-switch strategy on failure (watchdog)"
     echo
     echo "Internal commands:"
     echo "    daemon         Run zapret daemon (called by service)"
@@ -52,6 +54,7 @@ show_menu() {
     echo "6) Настроить работу без пароля"
     echo "7) Сменить режим ipset [Текущий - $(get_mode_ipset)]"
     echo "8) Автопроверка конфигураций"
+    echo "9) Автопереключение при сбое (watchdog)"
     echo "0) Выход"
     echo "=============================================================================="
     echo ""
@@ -66,6 +69,7 @@ show_menu() {
     6) setup_permissions || show_error "Не удалось настроить разрешения" ;;
     7) change_mode_ipset "$(get_mode_ipset)" || show_error "Не удалось сменить режим ipset" ;;
     8) show_autocheck_menu || show_error "Не удалось выполнить автопроверку конфигураций" ;;
+    9) show_watchdog_menu || show_error "Не удалось запустить watchdog" ;;
     0) exit 0 ;;
     *) show_error "Неверный выбор" ;;
     esac

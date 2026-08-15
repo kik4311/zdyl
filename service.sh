@@ -30,6 +30,8 @@ source "$HOME_DIR_PATH/src/cli/desktop.sh"
 source "$HOME_DIR_PATH/src/cli/run.sh"
 source "$HOME_DIR_PATH/src/cli/permissions.sh"
 source "$HOME_DIR_PATH/src/cli/autocheck.sh"
+source "$HOME_DIR_PATH/src/cli/update.sh"
+source "$HOME_DIR_PATH/src/cli/watchdog.sh"
 
 check_dependencies
 
@@ -72,6 +74,14 @@ case "${1:-}" in
     autocheck)
         shift
         handle_autocheck_command "$@"
+        ;;
+    update)
+        shift
+        handle_update_command "$@"
+        ;;
+    watchdog)
+        shift
+        handle_watchdog_command "$@"
         ;;
     -h|--help|help)
         show_usage
