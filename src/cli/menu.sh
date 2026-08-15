@@ -55,6 +55,7 @@ show_menu() {
     echo "7) Сменить режим ipset [Текущий - $(get_mode_ipset)]"
     echo "8) Автопроверка конфигураций"
     echo "9) Автопереключение при сбое (watchdog)"
+    echo "10) Проверить обновления"
     echo "0) Выход"
     echo "=============================================================================="
     echo ""
@@ -70,6 +71,7 @@ show_menu() {
     7) change_mode_ipset "$(get_mode_ipset)" || show_error "Не удалось сменить режим ipset" ;;
     8) show_autocheck_menu || show_error "Не удалось выполнить автопроверку конфигураций" ;;
     9) show_watchdog_menu || show_error "Не удалось запустить watchdog" ;;
+    10) handle_update_command || show_error "Не удалось выполнить проверку обновлений" ;;
     0) exit 0 ;;
     *) show_error "Неверный выбор" ;;
     esac
