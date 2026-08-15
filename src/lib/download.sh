@@ -79,6 +79,7 @@ resolve_zapret_version() {
 # Скачивание релиза zapret
 download_zapret_release() {
     local tag="$1"
+    [[ "$tag" != v* ]] && tag="v${tag}"
     local archive="zapret-${tag}.tar.gz"
     local url="https://github.com/${ZAPRET_REPO}/releases/download/${tag}/${archive}"
     local tmp="/tmp/${archive}"
