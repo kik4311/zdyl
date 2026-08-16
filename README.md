@@ -14,15 +14,27 @@
 
 ---
 
+## Что это такое
+
+Если YouTube и Discord замедлены вашим провайдером — zapret (nfqws) обходит это с помощью подмены пакетов. Но готовые стратегии пишутся для Windows (`.bat`), а ручная настройка на Linux — боль.
+
+**zdyl** — это адаптер, который:
+
+- берёт готовые стратегии [Flowseal](https://github.com/Flowseal/zapret-discord-youtube) и автоматически адаптирует их под Linux
+- скачивает собранный бинарник `nfqws` из [zapret](https://github.com/bol-van/zapret)
+- ставит всё как системный сервис под вашу init-систему
+- сам подбирает рабочую стратегию (автопроверка) и переключает её при сбоях (watchdog)
+
 ## Возможности
 
 - **Простая установка** — одна команда скачивает nfqws и стратегии
-- **Автопроверка конфигураций** — подбирает лучшую стратегию для ваших целей
-- **Watchdog** — при сбоях автоматически переключает стратегию
+- **Автопроверка конфигураций** — аналог Run Tests: подбирает лучшую стратегию под ваши цели
+- **Watchdog** — при 3 сбоях подряд автоматически переключает стратегию
 - **Встроенное обновление** — проверка и установка новых версий nfqws и стратегий
-- **GameFilter** — поддержка игровых стратегий
-- **Firewall** — nftables и iptables
+- **GameFilter** — поддержка игровых стратегий (TCP/UDP)
+- **Firewall** — nftables и iptables (автоопределение)
 - **Init-системы** — systemd, OpenRC, runit, s6, dinit
+- **Режимы ipset** — Any / Loaded / None
 - **Меню приложений** — запуск через ярлык в GUI
 
 ---
@@ -37,17 +49,42 @@
 
 ---
 
-## Быстрый старт
+## Установка
+
+### Быстрый запуск (без сервиса)
 
 ```bash
 git clone https://github.com/kik4311/zdyl.git
 cd zdyl
 
-./service.sh download-deps --default
-./service.sh
+./service.sh download-deps --default   # скачать nfqws и стратегии
+./service.sh run                       # запустить вручную, проверить работу
 ```
 
-Скрипт покажет интерактивное меню: запуск, управление сервисом, настройка.
+### Полная установка (с автозапуском)
+
+```bash
+git clone https://github.com/kik4311/zdyl.git
+cd zdyl
+
+./service.sh download-deps --default   # скачать nfqws и стратегии
+./service.sh setup-permissions         # настроить работу без пароля (рекомендуется)
+./service.sh service install           # создать и запустить сервис автозапуска
+./service.sh desktop install           # ярлык в меню приложений (опционально)
+```
+
+При установке сервиса скрипт проверит `conf.env` (при необходимости запросит параметры) и создаст сервис под вашу init-систему.
+
+---
+
+## Удаление
+
+```bash
+./service.sh service remove      # остановить и удалить сервис
+./service.sh desktop remove      # удалить ярлык
+./service.sh setup-permissions remove   # убрать настройки NOPASSWD
+rm -rf zdyl                      # удалить каталог проекта
+```
 
 ---
 
@@ -56,10 +93,21 @@ cd zdyl
 Адаптер загружает стратегии из [Flowseal/zapret-discord-youtube](https://github.com/Flowseal/zapret-discord-youtube) — готовые `.bat`-конфигурации для `nfqws` (бинарник из [zapret](https://github.com/bol-van/zapret)). Стратегии автоматически адаптируются под Linux (переименование, замена путей) и запускаются через `nfqws`.
 
 **Структура каталога:**
-- `zapret-latest/` — стратегии, загруженные из Flowseal (обновляются через `download-deps`)
-- `custom-strategies/` — собственные стратегии (всегда в списке)
-- `nfqws` — бинарник zapret
-- `conf.env` — конфигурация
+
+```
+zdyl/
+├── service.sh              # главный скрипт (CLI)
+├── conf.env                # конфигурация
+├── targets.txt             # цели для autocheck/watchdog
+├── nfqws                   # бинарник zapret
+├── zapret-latest/          # стратегии из Flowseal (обновляются через download-deps)
+├── custom-strategies/      # собственные стратегии (всегда в списке)
+├── user-lists/             # пользовательские списки (белый/чёрный список)
+└── src/
+    ├── cli/                # команды CLI (config, service, run, ...)
+    ├── lib/                # общие библиотеки (firewall, ipswitch, ...)
+    └── firewall-backends/  # бэкенды nftables / iptables
+```
 
 ---
 
@@ -78,11 +126,13 @@ firewall_backend=auto       # auto | nftables | iptables
 Управление конфигурацией:
 
 ```bash
-./service.sh config show                # показать текущую конфигурацию
-./service.sh config edit                # интерактивное редактирование
-./service.sh config set general.bat     # установить стратегию
-./service.sh config set general.bat enp0s3 -gt -gu   # стратегия + интерфейс + GameFilter
-./service.sh config set discord -n      # без перезапуска сервиса
+./service.sh config show                        # показать текущую конфигурацию
+./service.sh config edit                        # интерактивное редактирование
+./service.sh config set general.bat             # установить стратегию
+./service.sh config set general.bat enp0s3      # стратегия + интерфейс
+./service.sh config set general.bat enp0s3 -gt -gu   # + GameFilter
+./service.sh config set discord -fb iptables    # + бэкенд файрвола
+./service.sh config set discord -n              # без перезапуска сервиса
 ```
 
 ---
@@ -109,13 +159,14 @@ firewall_backend=auto       # auto | nftables | iptables
 | 10 | Проверить обновления |
 | 0 | Выход |
 
-### Запуск zapret
+### Запуск вручную
 
 ```bash
-./service.sh run                              # интерактивный выбор параметров
-./service.sh run --config conf.env            # из конфигурационного файла
-./service.sh run -s general.bat -i enp0s3     # прямые параметры
+./service.sh run                                    # интерактивный выбор параметров
+./service.sh run --config conf.env                  # из конфигурационного файла
+./service.sh run -s general.bat -i enp0s3           # прямые параметры
 ./service.sh run -s general.bat -i enp0s3 -gt -gu   # с GameFilter
+./service.sh run -fb iptables                       # принудительный бэкенд
 ```
 
 ### Стратегии
@@ -123,6 +174,8 @@ firewall_backend=auto       # auto | nftables | iptables
 ```bash
 ./service.sh strategy list    # показать доступные стратегии
 ```
+
+Свои стратегии кладите в `custom-strategies/` — они появятся в списке автоматически.
 
 ### Обновление зависимостей
 
@@ -139,6 +192,32 @@ firewall_backend=auto       # auto | nftables | iptables
 ./service.sh update           # проверить и установить
 ./service.sh update --yes     # установить без подтверждения
 ```
+
+### Прочие команды
+
+```bash
+./service.sh kill                        # остановить nfqws и очистить правила firewall
+./service.sh setup-permissions           # NOPASSWD для nft/nfqws
+./service.sh setup-permissions status    # показать текущие настройки
+./service.sh setup-permissions remove    # убрать настройки
+./service.sh --help                      # полная справка
+```
+
+---
+
+## Режимы ipset
+
+Пункт 7 в меню (или `conf.env`) управляет режимом списков:
+
+| Режим | Что делает |
+|-------|------------|
+| **Loaded** | Все списки загружены: и свои (ipset), и внешние (list-*) |
+| **Any** | nfqws обрабатывает весь трафик (без ограничения списками) |
+| **None** | Только внешние списки, свои отключены |
+
+Переключение идёт по кругу: **Loaded → None → Any → Loaded**. При переключении списки автоматически сохраняются в бекап и восстанавливаются.
+
+> На время автопроверки ipset переключается в режим **Any** и в конце автоматически восстанавливается.
 
 ---
 
@@ -168,8 +247,6 @@ CloudflareDNS1111 = "PING:1.1.1.1"
 
 Можно проверять все конфигурации или выбранные: `1,3,5-10`.
 
-> На время проверки ipset переключается в режим `Any` и восстанавливается в конце.
-
 ---
 
 ## Watchdog (автопереключение при сбое)
@@ -195,8 +272,6 @@ CloudflareDNS1111 = "PING:1.1.1.1"
 ```bash
 ./service.sh service install   # установить и запустить сервис
 ```
-
-Скрипт проверяет `conf.env` (при необходимости запросит параметры) и создаёт сервис под вашу init-систему.
 
 Управление:
 
@@ -271,16 +346,6 @@ dinitctl log zapret_discord_youtube
 
 ---
 
-## Прочие команды
-
-```bash
-./service.sh kill              # остановить nfqws и очистить правила firewall
-./service.sh setup-permissions # настроить NOPASSWD для nft/nfqws
-./service.sh --help            # полная справка
-```
-
----
-
 ## О версиях
 
 По умолчанию используются:
@@ -293,14 +358,52 @@ dinitctl log zapret_discord_youtube
 
 ---
 
+## Устранение неполадок
+
+**Ничего не работает после установки сервиса**
+
+```bash
+./service.sh service status     # посмотреть статус
+./service.sh run                # запустить вручную — так видны ошибки
+```
+
+**Не удаётся переключить режим ipset обратно из Any**
+
+Бекап списков создаётся автоматически при каждом переключении. Если бекап потерян (например, после `download-deps`), просто повторите цикл: переключитесь в None и обратно, либо переустановите стратегии:
+
+```bash
+./service.sh download-deps --default
+```
+
+**Сервис требует пароль при перезапуске**
+
+```bash
+./service.sh setup-permissions
+```
+
+**Стратегия не работает (YouTube/Discord не открываются)**
+
+1. Запустите автопроверку — она подберёт рабочую стратегию:
+   ```bash
+   ./service.sh autocheck
+   ```
+2. Если ничего не подошло — проверьте [Issues](https://github.com/Flowseal/zapret-discord-youtube/issues) и [Discussions](https://github.com/Flowseal/zapret-discord-youtube/discussions) репозитория стратегий: проблема может уже обсуждаться
+3. Попробуйте более свежую/старую версию nfqws: `./service.sh download-deps -z <версия>`
+
+**nftables не находится**
+
+Проверьте, что установлен и запущен nftables, либо принудительно укажите бэкенд:
+
+```bash
+./service.sh config set discord -fb iptables
+```
+
+---
+
 ## Поддержка и помощь
 
 > [!IMPORTANT]
 > Это **адаптер**! Он не гарантирует, что стратегии разблокируют всё.
-
-**Сначала проверьте:**
-1. [Issues](https://github.com/Flowseal/zapret-discord-youtube/issues) и [Discussions](https://github.com/Flowseal/zapret-discord-youtube/discussions) репозитория стратегий — проблема может уже обсуждаться
-2. Воспользуйтесь [автопроверкой конфигураций](#автопроверка-конфигураций-run-tests) — она подберёт рабочую стратегию
 
 **В [Issues](https://github.com/kik4311/zdyl/issues) пишите:**
 - Ошибки в работе скрипта адаптера
