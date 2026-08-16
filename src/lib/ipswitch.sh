@@ -45,6 +45,13 @@ switch_to_none(){
 }
 
 switch_to_any(){
+    # Сохраняем списки в бекап, если он отсутствует или пуст,
+    # чтобы из режима Any всегда можно было вернуться обратно
+    if [[ ! -f "$bipset" || ! -s "$bipset" ]]; then
+        if [[ -f "$ipset" && -s "$ipset" ]] && ! grep -q "203.0.113.113/32" "$ipset"; then
+            cp "$ipset" "$bipset"
+        fi
+    fi
     rm -rf "$ipset"
     touch "$ipset"
     echo "Выбранный режим - $(get_mode_ipset)"
@@ -53,7 +60,7 @@ switch_to_any(){
 }
 
 switch_to_loaded(){
-    if [ -f "$bipset" ]; then
+    if [[ -f "$bipset" && -s "$bipset" ]]; then
         rm -rf "$ipset"
         cp "$bipset" "$ipset"
         echo "Выбранный режим - $(get_mode_ipset)"

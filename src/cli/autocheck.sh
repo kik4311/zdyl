@@ -266,10 +266,12 @@ _ac_run_strategy() {
 _ac_ipset_save() {
     local ipset="$REPO_DIR/lists/ipset-all.txt"
     local bipset="$REPO_DIR/lists/ipset-all.txt.backup"
-    if [[ -f "$ipset" ]]; then
+    # Сохраняем только реальные списки — не затираем валидный бекап
+    # пустым файлом (режим Any) или заглушкой (режим None)
+    if [[ -s "$ipset" ]] && ! grep -q "203.0.113.113/32" "$ipset"; then
         rm -f "$bipset"
         cp "$ipset" "$bipset"
-    else
+    elif [[ ! -f "$bipset" ]]; then
         touch "$ipset"
     fi
     AC_IPSET_SAVED=true
