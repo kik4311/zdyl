@@ -146,8 +146,16 @@ setup_repository() {
 
         if [[ -d "$REPO_DIR/lists" && -d "$user_lists_dir" ]]; then
             log "Копирование lists"
-            rm -f "$user_lists_dir"/*
-            cp "$REPO_DIR/lists"/* "$user_lists_dir/"  
+            # Сохраняем состояние списков между переустановками:
+            # копируем только отсутствующие файлы, пользовательские не трогаем.
+            # rm+cp разрывает возможные хардлинки, чтобы не портить оригиналы.
+            for f in "$REPO_DIR/lists"/*; do
+                local fname
+                fname=$(basename "$f")
+                if [[ ! -e "$user_lists_dir/$fname" ]]; then
+                    cp "$f" "$user_lists_dir/$fname"
+                fi
+            done
         fi
         log "Удаление существующего репозитория..."
         rm -rf "$REPO_DIR"
@@ -190,8 +198,12 @@ setup_repository() {
         chmod 644 "$user_lists_dir/list-general-user.txt"
         chmod 644 "$user_lists_dir/list-exclude-user.txt"
 
-        # Создаём хардлинки (не симлинки!) чтобы обойти проблемы с доступом к /home/user
-        for file in "$user_lists_dir"/*; do
+        # Хардлинкуем ТОЛЬКО пользовательские списки (*-user.txt).
+        # Остальные файлы приходят из клона: хардлинк системных списков
+        # приводил к тому, что смена ipset-режима (обнуление файла на месте)
+        # затирала копию в user-lists, и порча воспроизводилась при reinstall.
+        for file in "$user_lists_dir"/*-user.txt; do
+            [[ -e "$file" ]] || continue
             ln -f "$file" "$REPO_DIR/lists/" 2>/dev/null || true
         done
     fi
